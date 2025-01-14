@@ -1,5 +1,5 @@
 import pandas as pd
-import matplotlib as plt
+import matplotlib.pyplot as plt
 
 file_path = 'vehicles.csv'
 
@@ -16,7 +16,7 @@ try:
     print(data.info) # combines head and tail functionality
     print(data.info()) #it is an error, not transposed, it is like a table
 
-    #count : return total numbers of values without null 
+    #count : return total numbers of values without null values
     print("Studying count")
     print(data.count())
 

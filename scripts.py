@@ -1,5 +1,5 @@
 import pandas as pd
-
+import matplotlib as plt
 
 file_path = 'vehicles.csv'
 
@@ -32,13 +32,19 @@ try:
     print("Studying describe")
     print(data.describe())
     # but on quantitative data it dont describe these, it gives count, unique,top and frequency only
-    print("Describe on quantitative data")
-    sdf = data[['manufacturer','color','body_type','engine_type']]
-    print(sdf.describe())
+    # print("Describe on quantitative data")
+    # sdf = data[['manufacturer','color','body_type','engine_type']]
+    # print(sdf.describe())
 
-    print(sdf['manufacturer'[:10]]) # equivalence: sdf['manufacturer'].head(10)
+    # print(sdf['manufacturer'[:10]]) # equivalence: sdf['manufacturer'].head(10)
 
-    print(sdf['manufacturer'][3:10]) #selecting from 3 to ten(10)
+    # print(sdf['manufacturer'][3:10]) #selecting from 3 to ten(10)
+
+    #astype: when cleaning is done before
+
+    data['proposed_purchase_price'].plot.hist(bins=30, alpha=0.7,color='blue')
+    plt.savefig('./purchase_price.png', format='png', dpi=400)
+    plt.show()
 
 except FileNotFoundError:
     print(f"Error: The file '{file_path}' was not found.")
@@ -46,4 +52,4 @@ except pd.errors.EmptyDataError:
     print("Error: The file is empty.")
 except Exception as e:
     print(f"An unexpected error occurred: {e}")
-    
+

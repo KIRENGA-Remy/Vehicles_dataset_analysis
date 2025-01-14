@@ -28,10 +28,17 @@ try:
     print("Studying nunique")
     print(data.nunique())
 
-    #describe: describes counts, mean, frequency and so on
-    # but on quantitative data it dont describe these
+    #describe: describes counts, mean, frequency, std:standard deviation,
     print("Studying describe")
     print(data.describe())
+    # but on quantitative data it dont describe these, it gives count, unique,top and frequency only
+    print("Describe on quantitative data")
+    sdf = data[['manufacturer','color','body_type','engine_type']]
+    print(sdf.describe())
+
+    print(sdf['manufacturer'[:10]]) # equivalence: sdf['manufacturer'].head(10)
+
+    print(sdf['manufacturer'][3:10]) #selecting from 3 to ten(10)
 
 except FileNotFoundError:
     print(f"Error: The file '{file_path}' was not found.")

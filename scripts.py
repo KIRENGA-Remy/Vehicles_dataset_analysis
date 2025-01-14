@@ -16,6 +16,23 @@ try:
     print(data.info) # combines head and tail functionality
     print(data.info()) #it is an error, not transposed, it is like a table
 
+    #count : return total numbers of values without null 
+    print("Studying count")
+    print(data.count())
+
+    #value_counts: counts unique categories, like audi=7, bmw=2, 
+    print("Studying value_counts")
+    print(data.value_counts())
+
+    #nunique: counts number of unique values
+    print("Studying nunique")
+    print(data.nunique())
+
+    #describe: describes counts, mean, frequency and so on
+    # but on quantitative data it dont describe these
+    print("Studying describe")
+    print(data.describe())
+
 except FileNotFoundError:
     print(f"Error: The file '{file_path}' was not found.")
 except pd.errors.EmptyDataError:

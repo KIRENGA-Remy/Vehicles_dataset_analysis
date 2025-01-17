@@ -1,6 +1,7 @@
 #TO RUN: jupyter notebook
 import pandas as pd
 import matplotlib.pyplot as plt
+import numpy as np
 
 file_path = 'vehicles.csv'
 
@@ -45,15 +46,31 @@ try:
 
     #astype: when cleaning is done before
 
-    data['proposed_purchase_price'].plot.hist(bins=30, alpha=0.7,color='blue')
-    plt.savefig('./purchase_price.png', format='png', dpi=400)
-    plt.show()
+    # data['proposed_purchase_price'].plot.hist(bins=30, alpha=0.7,color='blue')
+    # plt.savefig('./purchase_price.png', format='png', dpi=400)
+    # plt.show()
+
 
 #     What Are Bins?
 # Bins are the intervals (or "buckets") into which the data values are sorted.
 # Each bin represents a range of data, and the height of the bar for that bin corresponds to the number of data points that fall within that range.
 
 # Bin Width= Range of Data / Number of Bins
+
+#BAR CHART
+    bar_chart = data['manufacturer']
+    unique_values, counts = np.unique(bar_chart, return_counts=True)
+    plt.figure(figsize=(23,3))
+    plt.bar(unique_values, counts, alpha=0.2, color='blue', edgecolor='white')
+    plt.savefig('pic.png', format='png', dpi=300)
+    plt.show()
+
+    #USE OF XTICKS ON HISTOGRAM
+    number_of_bins=int(np.ceil(np.log2(len(bar_chart))+1)) #sturgey's rule: how to calculate the number of bins
+    plt.figure(figsize=(23,3))
+    plt.hist(bar_chart, bins=number_of_bins, edgecolor='yellow')
+    plt.xticks(unique_values)
+    plt.show()
 
 
 except FileNotFoundError:

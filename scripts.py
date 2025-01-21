@@ -121,6 +121,16 @@ try:
         plt.scatter(x,y, color='red', alpha=0.5, edgecolors='b', linewidths=2)
         plt.show()
 
+        # 
+        data.groupby('manufacturer')[['selling_price', 'proposed_purchase_price']].sum()
+
+        # Syntax memorization
+        data.groupby(['manufacturer', 'fuel_type']).agg({
+            'seating_capacity': ['min', 'max', 'mean', 'std', 'first', 'last'],
+            'selling_price': ['min', 'max', 'mean', 'std', 'sum', 'var', 'count'],
+            'proposed_purchase_price': ['min', 'max', 'mean', 'std', 'sum']
+        })
+
 
 except FileNotFoundError:
     print(f"Error: The file '{file_path}' was not found.")

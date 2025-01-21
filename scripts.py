@@ -2,6 +2,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
+import seaborn as sns
 
 file_path = 'vehicles.csv'
 
@@ -71,6 +72,54 @@ try:
     plt.hist(bar_chart, bins=number_of_bins, edgecolor='yellow')
     plt.xticks(unique_values)
     plt.show()
+
+    for col in ['manufacturer','year','color', 'body_type', 'engine_type', 'transmission', 'fuel_type', 'seating_capacity', 'vehicle_condition_status', 'owner_profession', 'owner_age']:
+        #vehicles_in_district_counts = inner_merged_df[col].value_counts()
+        plt.figure(figsize=(23, 5))
+        ax = sns.countplot(x=col, data=data, palette='colorblind', order=data[col].value_counts().index)
+        plt.grid(color="green", linestyle="--", linewidth=0.5)
+        plt.title(f"{col.capitalize()} with their counts", fontdict={"family": "serif", "color": "blue", "size": 20})
+        plt.xticks(rotation=90) # Rotate x labels for better visibility
+        # Add counts at the top of each bar
+        for p in ax.patches:
+            ax.annotate(f'{int(p.get_height())}', (p.get_x() + p.get_width() / 2., p.get_height()), ha='center', va='bottom', fontsize=12, color='green', rotation=90)
+        plt.show()
+
+    #A LINE CHART
+    for col in [
+        'manufacturer',
+        'year',
+        'color',
+        'body_type',
+        'engine_type',
+        'transmission',
+        'fuel_type',
+        'seating_capacity',
+        'vehicle_condition_status',
+        'owner_profession',
+        'owner_age']:
+        plt.figure(figsize=(23, 5))
+        # Count values for the current column
+        counts = data[col].value_counts().sort_index()
+        # Create a line chart
+        plt.plot(counts.index, counts.values, marker='o', linestyle='-', color='blue')
+        # Customize the plot
+        plt.grid(color="green", linestyle="--", linewidth=0.5)
+        plt.title(f"{col.capitalize()} Counts", fontdict={"family": "serif", "color": "blue", "size": 20})
+        plt.xlabel(col.capitalize(), fontsize=14)
+        plt.ylabel('Counts', fontsize=14)
+        plt.xticks(rotation=90)  # Rotate x labels for better visibility
+        # Annotate counts on the line chart
+        for x, y in zip(counts.index, counts.values):
+            plt.text(x, y, str(y), ha='center', va='bottom', fontsize=12, color='green')
+        plt.tight_layout()  # Adjust layout
+        plt.show()
+
+        #scatter plot
+        x=data['selling_price'][:100]
+        y=data['proposed_purchase_price'][:100]
+        plt.scatter(x,y, color='red', alpha=0.5, edgecolors='b', linewidths=2)
+        plt.show()
 
 
 except FileNotFoundError:

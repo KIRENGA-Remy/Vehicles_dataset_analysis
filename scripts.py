@@ -130,7 +130,29 @@ try:
             'selling_price': ['min', 'max', 'mean', 'std', 'sum', 'var', 'count'],
             'proposed_purchase_price': ['min', 'max', 'mean', 'std', 'sum']
         })
+        # adding numbers on the top
+        data.groupby("owner_district")[['selling_price', 'proposed_purchase_price']].sum().plot(kind="barh").bar_label(plt.gca().containers[0], fmt="%.2f")
+        plt.show()
 
+        #CORERATION
+        plt.figure(figsize=(20, 3))
+        numeric_columns=['owner_age','selling_price','proposed_purchase_price','year','kolometers']
+        heatmap_data=data[numeric_columns].corr()
+        sns.heatmap(heatmap_data,
+                    cmap='BuPu',
+                    annot=True,
+                    linewidths=0.5,
+                    fmt='.2f')
+        plt.show()
+
+        #COLLERATION COUNTING
+        correlation=data['proposed_purchase_price'].corr(data['selling_price'])
+
+        #INTERPRETATION OF DATA ON a BOX PLOT
+        plt.figure(figsize=(20, 3))
+        sns.boxplot(data=data[['selling_price', 'proposed_purchase_price']], palette='Accent')
+        plt.title("Box plot of selling price and purchase price", fontsize= 15)
+        plt.show()
 
 except FileNotFoundError:
     print(f"Error: The file '{file_path}' was not found.")
